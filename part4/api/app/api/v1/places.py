@@ -45,6 +45,7 @@ place_post_model = api.model(
     {
         "id": fields.String,
         "title": fields.String,
+        "price": fields.Float,
         "description": fields.String,
         "price": fields.Float,
         "latitude": fields.Float,
@@ -81,7 +82,7 @@ class PlaceList(Resource):
         data = facade.get_all_places()
         if not all(isinstance(p, Place) for p in data):
             raise TypeError("This is a place list")
-        fields = ["id", "title", "latitude", "longitude"]
+        fields = ["id", "title", "price", "latitude", "longitude"]
         res_dic = [{field: d.__dict__[field] for field in fields} for d in data]
         return res_dic, 200
 

@@ -1,4 +1,4 @@
-# Business logic and API implementation
+# Authorization and Database Implementation
 
 ## Requirements
 
@@ -15,48 +15,50 @@ To get started and using the implementation, please follow the steps listed belo
 
 - Cloning the repo
   
-	  ```
-    git clone https://github.com/Ethan-of-Aussie/holbertonschool-hbnb.git
- 	  ```
+	```
+		git clone https://github.com/Ethan-of-Aussie/holbertonschool-hbnb.git
+ 	```
   
 - Navigating to target directory
   
     ```
-	  cd holbertonschool-hbnb/part3/
+		cd holbertonschool-hbnb/part3/
     ```
 
 - Creating virtual environment
 
-	  ```
-	  python3 -m venv venv
- 	  ```
+	```
+		python3 -m venv venv
+ 	```
  
 - Activating virtual environment (if Windows)
 
   	```
-  	venv\Scripts\activate
+  		venv\Scripts\activate
    	```
 
 - Activating virtual environment (if mac or linux)
   
-	  ```
-    source venv/bin/activate
-  	```
+	```
+ 		source venv/bin/activate
+	```
 
     If you get the following error
 
     ```
-    bash: venv/bin/activate: No such file or directory
+    	bash: venv/bin/activate: No such file or directory
     ```
 
     Try doing the following
 
     ```
-    sudo apt update
+    	sudo apt update
     ```
 
+    followed by
+
     ```
-    sudo apt install python3.10-venv
+    	sudo apt install python3.10-venv
     ```
 
     Recreate the virutal environment and activate it following the above process after which the next step listed can be followed.
@@ -64,7 +66,7 @@ To get started and using the implementation, please follow the steps listed belo
 - Installing required packages
   
     ```
-    pip install -r requirements.txt
+    	pip install -r requirements.txt
     ```
 
 - Installing SQLite 3
@@ -72,24 +74,26 @@ To get started and using the implementation, please follow the steps listed belo
     For Powershell
 
     ```
-    winget install SQLite.SQLite
+    	winget install SQLite.SQLite
     ```
 
     For bash
 
     ```
-    sudo apt install sqlite3
+    	sudo apt install sqlite3
     ```
 
 - Database creation
 
     ```
-    flask shell
+    	flask shell
     ```
 
+	followed by within the interpreter that opens
+
     ```
-    >>> from app import db
-    >>> db.create_all()
+    	 from app import db
+    	 db.create_all()
     ```
 
 - Database population (use when inside part 3 directory)
@@ -97,23 +101,24 @@ To get started and using the implementation, please follow the steps listed belo
     For Windows
 
     ```
-    Get-Content populate_script.sql | sqlite3 instance/development.db
+    	Get-Content populate_script.sql | sqlite3 instance/development.db
     ```
 
     For Linux/Mac
 
     ```
-    sqlite3 instance/development.db < populate_script.sql
+    	sqlite3 instance/development.db < populate_script.sql
     ```
 
 - Running the server
   
-	  ```
-    python3 run.py
+	```
+    	python3 run.py
   	```
   
 Listed below is the Entity Relationship Diagram of our Hbnb clone
 
+```mermaid
 erDiagram
     USER ||--o{ PLACE : registers
     USER ||--o{ REVIEW : writes
@@ -152,6 +157,7 @@ erDiagram
         string place_id FK
         string amenity_id FK
     }
+```
   
 The relationships between each classes of our clone is as follows:
 
@@ -186,6 +192,7 @@ Listed below are some example trial codes (curl) that can be used after running 
       "id": generated id,
       "message": "User created successfully"
     }
+    ```
 
     * Retrieval:
 
@@ -217,16 +224,18 @@ Listed below are some example trial codes (curl) that can be used after running 
     After the login request has been made, user will be returned with an access token which can be used for accessing authenticated endpoints.
 
     Expected return:
-
+    
+	```
     {
       "access_token": "eyJhbGci..."
     }
-
+	```
 
     * Update:
 
-    - Please replace <user_id> with the id generated during user creation.
-    - Please replace access_token with the token received after the authorization.
+    Please replace <user_id> with the id generated during user creation.
+    
+    Please replace access_token with the token received after the authorization.
 
     ```
       curl -X PUT http://localhost:5000/api/v1/users/<user_id> \
@@ -270,14 +279,15 @@ Listed below are some example trial codes (curl) that can be used after running 
     Only admins are allowed to make these changes. Listed below are the api calls for an admin.
 
     * Admin login
-
+	```
       curl -X POST http://localhost:5000/api/v1/auth/login \
       -H "Content-type: application/json" \
       -d '{
           "email": "admin@hbnb.io",
           "password": "admin1234"
           }'
-
+	```
+  
     Expected return
 
     ```
@@ -288,6 +298,7 @@ Listed below are some example trial codes (curl) that can be used after running 
 
     * Admin User Creation
 
+	```
       curl -X POST http://localhost:5000/api/v1/admins/users/ \
       -H "Content-type: application/json" \
       -H "Authorization: Bearer access_token" \
@@ -297,7 +308,8 @@ Listed below are some example trial codes (curl) that can be used after running 
             "password": "random",
             "email": "ran@random.com"
           }'
-    
+ 	```
+  
     Expected return
     
     ```
@@ -305,13 +317,15 @@ Listed below are some example trial codes (curl) that can be used after running 
       "id": generated id,
       "message": "User created successfully"
     }
-
+	```
+    
     * Admin user update
 
     Unlike regular user, admins can change both the email and password of a user.
 
-    - Please replace <user_id> with the id generated during user creation.
-    - Please replace access_token with the token received after the authorization.
+    Please replace <user_id> with the id generated during user creation.
+    
+    Please replace access_token with the token received after the authorization.
 
      ```
           curl -X PUT http://localhost:5000/api/v1/admins/users/<user_id> \
