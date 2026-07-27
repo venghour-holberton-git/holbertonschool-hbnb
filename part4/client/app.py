@@ -13,5 +13,9 @@ def home():
 def login():
     return render_template('login.html')
 
+@app.route('/place')
+def place():
+    return render_template('place.html')
+
 if __name__ == "__main__":
     app.run(debug=True, port=5001)
