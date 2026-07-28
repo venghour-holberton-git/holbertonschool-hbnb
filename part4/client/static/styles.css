@@ -78,6 +78,7 @@ main {
     right: calc(-100% + 10px);
     padding: 30px;
     background-color: whitesmoke;
+    color: black;
     display: flex;
     justify-content: center;
     align-items: center;

@@ -6,6 +6,17 @@
 document.addEventListener('DOMContentLoaded', () => {
   checkAuthentication()
   const form = document.getElementById('login-form')
+  const registerForm = document.getElementById('register-form')
+    try {
+        registerForm.addEventListener("submit", async (e) => {
+            e.preventDefault()
+            data = new FormData(registerForm);
+            request = Object.fromEntries(data);
+            submitRegister(request);
+        })
+    } catch (err) {
+        console.log(err);
+    }
     try {
         document.getElementById('price-filter').addEventListener('change', async (event) => {
         event.preventDefault()
@@ -225,3 +236,29 @@ function handleResponse(response) {
           alert('Failed to submit review');
       }
   }
+async function submitRegister (request) {
+    const reponse = await fetch('http://localhost:5000/api/v1/users/', {
+        method: "POST",
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(request)
+    }).then(res => res.json())
+    console.log(reponse);
+    successErrorAlert(reponse)
+    
+}
+const successErrorAlert = (apiResponse) => {
+    const dialogBox = document.querySelector(".custom-dialog")
+    if (!("error" in apiResponse)) {
+        dialogBox.classList.add("success")
+        dialogBox.innerHTML = "success"
+    } else {
+        dialogBox.innerHTML = apiResponse.error
+    }
+    dialogBox.classList.add("show-dialog")
+    setTimeout(() => {
+        dialogBox.classList.remove("show-dialog")
+        dialogBox.classList.remove("success")
+    }, 2000)
+}
