@@ -95,9 +95,6 @@ class PlaceResource(Resource):
     def get(self, place_id):
         """Get place details by ID"""
         data = facade.get_place(place_id)
-        print("fkasjflaskfj")
-        print(data.__dict__)
-        print("oooooo")
         if data == None:
             return {"error": "Place dose not exist"}, 200
         return data, 200
