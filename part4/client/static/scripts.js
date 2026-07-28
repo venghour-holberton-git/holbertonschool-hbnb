@@ -40,8 +40,11 @@ document.addEventListener('DOMContentLoaded', () => {
             e.preventDefault()
             formData = new FormData(reviewForm)
             const request = Object.fromEntries(formData)
+            const id = window.location.pathname.split("/").pop()
             console.log(request);
+            console.log(getCookie('token'));
             
+            submitReview(getCookie('token'), id, request.review_text, request.rating)
         })
     } catch (err) {
         console.log("error", err);
@@ -180,7 +183,20 @@ function checkReviewAuthentication() {
       }
       return token;
   }
-async function submitReview(token, placeId, reviewText) {
+async function submitReview(token, placeId, reviewText, rating) {
+    request = {
+        text: reviewText,
+        rating: Number(rating),
+        place_id: placeId
+    }
+    fetch('http://127.0.0.1:5000/api/v1/reviews/', {
+        method: 'POST',
+        headers: {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(request)
+    })
       // Make a POST request to submit review data
       // Include the token in the Authorization header
       // Send placeId and reviewText in the request body
