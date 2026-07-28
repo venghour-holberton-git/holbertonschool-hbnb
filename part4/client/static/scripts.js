@@ -94,18 +94,19 @@ return await response.json();
 }
 function displayPlaces(places) {
 const places_container = document.getElementById('places-list')
-let html_child = ""
+let display_html = ""
 places.forEach(element => {
-    html_child += `
-            <h6> ${element.title }</h6>
-            <p>Price per Night ${ element.price }</p>
-            <button class="details-button">
-                <a href='http://127.0.0.1:5001/places/${element.id}'>View Details</a>
-            </button>
+    display_html += `
+            <div class="place-card">
+                <h6> ${element.title }</h6>
+                <p>Price per Night ${ element.price }</p>
+                <button class="details-button">
+                    <a href='http://127.0.0.1:5001/places/${element.id}'>View Details</a>
+                </button>
+            <div>
         `
 });
 // Might need to add description later
-display_html = `<div class="place-card"> ${html_child} <div>`
 places_container.innerHTML = display_html
 // Clear the current content of the places list
 // Iterate over the places data

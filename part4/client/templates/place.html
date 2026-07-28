@@ -18,7 +18,7 @@
             <h1>{{ place_data.title }}</h1>
             <div>
                 <p> Price Per night: {{ place_data.price }}</p>
-                <p>Host: {{ place_data.owner.first_name + " " + place_data.owner.last_name }}</p>
+                <p>Host: {{ place_data.owner.first_name }} {{ place_data.owner.last_name }}</p>
                 <p>Description: {{ place_data.description }}</p>
                 <p>Amenities:</p>
             </div>
@@ -29,11 +29,17 @@
             <form id="review-form">
                 <label for="review-text">Review:</label>
                 <textarea id="review-text" name="review-text" required></textarea>
-                
+                <label for="rating_selector">Rating:</label>
+                <select id="rating_selector">
+                    {% for e in [0, 1, 2, 3, 4, 5] %}
+                    <option value="{{e}}">{{e}} star</option>
+                    {% endfor %}
+                </select>
                 <button type="submit">Submit</button>
             </form>
         </section>
+        <!-- need to implement authentication check to display review form -->
     </main>
-    <script src="scripts.js"></script>
+    <script src="{{ url_for('static', filename='scripts.js')}}"></script>
 </body>
 </html>
