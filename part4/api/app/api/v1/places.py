@@ -33,6 +33,7 @@ place_id_model = api.model(
         "id": fields.String,
         "title": fields.String,
         "description": fields.String,
+        "price": fields.Float,
         "latitude": fields.Float,
         "longitude": fields.Float,
         "owner": fields.Nested(user_model),
@@ -53,7 +54,6 @@ place_post_model = api.model(
         "owner_id": fields.String(attribute="owner.id")
     }
 )
-
 
 @api.route('/')
 class PlaceList(Resource):
@@ -95,6 +95,9 @@ class PlaceResource(Resource):
     def get(self, place_id):
         """Get place details by ID"""
         data = facade.get_place(place_id)
+        print("fkasjflaskfj")
+        print(data.__dict__)
+        print("oooooo")
         if data == None:
             return {"error": "Place dose not exist"}, 200
         return data, 200
