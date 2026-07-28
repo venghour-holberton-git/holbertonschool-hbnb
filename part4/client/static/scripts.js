@@ -27,12 +27,25 @@ document.addEventListener('DOMContentLoaded', () => {
           e.preventDefault();
           formData = new FormData(form)
           
-          data = Object.fromEntries(formData)
+          const data = Object.fromEntries(formData)
           console.log(data);
           loginUser(data.email, data.password)
         })
     } catch (err) {
         console.log("error ", err);
+    }
+    try {
+        reviewForm = document.getElementById("review-form")
+        reviewForm.addEventListener("submit", async (e) => {
+            e.preventDefault()
+            formData = new FormData(reviewForm)
+            const request = Object.fromEntries(formData)
+            console.log(request);
+            
+        })
+    } catch (err) {
+        console.log("error", err);
+        
     }
 });
 
@@ -160,3 +173,24 @@ const now = Date.now();
 
 return now >= expiry;
 }
+function checkReviewAuthentication() {
+      const token = getCookie('token');
+      if (!token) {
+          window.location.href = 'index.html';
+      }
+      return token;
+  }
+async function submitReview(token, placeId, reviewText) {
+      // Make a POST request to submit review data
+      // Include the token in the Authorization header
+      // Send placeId and reviewText in the request body
+      // Handle the response
+  }
+function handleResponse(response) {
+      if (response.ok) {
+          alert('Review submitted successfully!');
+          // Clear the form
+      } else {
+          alert('Failed to submit review');
+      }
+  }

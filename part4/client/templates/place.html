@@ -30,9 +30,9 @@
                 <label for="review-text">Review:</label>
                 <textarea id="review-text" name="review-text" required></textarea>
                 <label for="rating_selector">Rating:</label>
-                <select id="rating_selector">
-                    {% for e in [0, 1, 2, 3, 4, 5] %}
-                    <option value="{{e}}">{{e}} star</option>
+                <select name="rating" id="rating_selector">
+                    {% for e in range(6) %}
+                    <option value="{{e}}" {% if e == 3 %}selected{% endif %}>{{e}} star</option>
                     {% endfor %}
                 </select>
                 <button type="submit">Submit</button>
