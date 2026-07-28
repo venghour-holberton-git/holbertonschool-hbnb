@@ -77,7 +77,7 @@ function checkAuthentication() {
     const loginLink = document.getElementById('login-link');
     console.log(token);
     
-    if (!token && !checkIsTokenExpired(token)) {
+    if (!token || checkIsTokenExpired(token)) {
         loginLink.style.display = 'block';
     } else {
         loginLink.style.display = 'none';
@@ -114,12 +114,14 @@ let display_html = ""
 places.forEach(element => {
     display_html += `
             <div class="place-card">
-                <h6> ${element.title }</h6>
+                <h3> ${element.title }</h3>
                 <p>Price per Night ${ element.price }</p>
-                <button class="details-button">
-                    <a href='http://127.0.0.1:5001/places?place_id=${element.id}'>View Details</a>
-                </button>
-            <div>
+                <a href='http://127.0.0.1:5001/places?place_id=${element.id}'>
+                    <button class="details-button">
+                        View Details
+                    </button>
+                </a>
+            </div>
         `
 });
 // Might need to add description later
@@ -184,21 +186,32 @@ function checkReviewAuthentication() {
       return token;
   }
 async function submitReview(token, placeId, reviewText, rating) {
+    const dialogBox = document.querySelector(".custom-dialog")
     request = {
         text: reviewText,
         rating: Number(rating),
         place_id: placeId
     }
-    console.log(placeId);
-    
-    fetch('http://127.0.0.1:5000/api/v1/reviews/', {
+    const response = await fetch('http://127.0.0.1:5000/api/v1/reviews/', {
         method: 'POST',
         headers: {
             'Authorization': `Bearer ${token}`,
             'Content-Type': 'application/json'
         },
         body: JSON.stringify(request)
-    })
+    }).then(res => res.json())
+    console.log(response);
+    if (!("error" in response)) {
+        dialogBox.classList.add("success")
+        dialogBox.innerHTML = "success"
+    } else {
+        dialogBox.innerHTML = response.error
+    }
+    dialogBox.classList.add("show-dialog")
+    setTimeout(() => {
+        dialogBox.classList.remove("show-dialog")
+        dialogBox.classList.remove("success")
+    }, 2000)
       // Make a POST request to submit review data
       // Include the token in the Authorization header
       // Send placeId and reviewText in the request body

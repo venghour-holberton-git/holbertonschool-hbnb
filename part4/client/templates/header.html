@@ -1,6 +1,16 @@
-<a href="/">
-    <img src="{{ url_for('static', filename='images/logo.png')}}" alt="" class="logo">
-</a>
-<a href="/login" id="login-link">
-    <p style="color: white;">Login</p>
-</a>
+<div class="custom-navbar">
+    <a href="/">
+        <img src="{{ url_for('static', filename='images/logo.png')}}" alt="" class="logo">
+    </a>
+    <div class="custom-navbar-navigation">
+        <a href="/login" id="login-link">
+            <p style="color: white;">Login</p>
+        </a>
+        <a href="/register" id="login-link">
+            <p style="color: white;">Register</p>
+        </a>
+        <button onclick="document.cookie = 'token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/';
+        window.location = '/'
+        ">Log out</button>
+    </div>
+</div>
