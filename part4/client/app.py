@@ -20,14 +20,12 @@ def login():
 @app.route('/places/<place_id>')
 def place_id(place_id):
     token = request.cookies.get("token")
-    print(f'http://127.0.0.1:5000/api/v1/places/{place_id}')
     response = requests.get(f'http://127.0.0.1:5000/api/v1/places/{place_id}', 
         headers={
             "Authorization": f"Bearer {token}"
         }
     )
     data = response.json()
-    print(data)
     return render_template('place.html', place_id=place_id, place_data=data)
 
 if __name__ == "__main__":
