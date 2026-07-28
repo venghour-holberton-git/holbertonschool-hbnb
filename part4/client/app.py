@@ -6,7 +6,6 @@ app = Flask(__name__)
 @app.route('/')
 def home():
     places = requests.get("http://127.0.0.1:5000/api/v1/places/").json()
-    print(f"here they are {places}")
     return render_template('index.html', places=places)
 
 @app.route('/login')
@@ -17,8 +16,9 @@ def login():
 # def place():
 #     return render_template('place.html')
 
-@app.route('/places/<place_id>')
-def place_id(place_id):
+@app.route('/places')
+def place():
+    place_id = request.args.get("place_id")
     token = request.cookies.get("token")
     response = requests.get(f'http://127.0.0.1:5000/api/v1/places/{place_id}', 
         headers={

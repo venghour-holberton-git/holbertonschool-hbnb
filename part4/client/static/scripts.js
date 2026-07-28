@@ -40,7 +40,7 @@ document.addEventListener('DOMContentLoaded', () => {
             e.preventDefault()
             formData = new FormData(reviewForm)
             const request = Object.fromEntries(formData)
-            const id = window.location.pathname.split("/").pop()
+            const id = new URLSearchParams(window.location.search).get("place_id")
             console.log(request);
             console.log(getCookie('token'));
             
@@ -117,7 +117,7 @@ places.forEach(element => {
                 <h6> ${element.title }</h6>
                 <p>Price per Night ${ element.price }</p>
                 <button class="details-button">
-                    <a href='http://127.0.0.1:5001/places/${element.id}'>View Details</a>
+                    <a href='http://127.0.0.1:5001/places?place_id=${element.id}'>View Details</a>
                 </button>
             <div>
         `
@@ -189,6 +189,8 @@ async function submitReview(token, placeId, reviewText, rating) {
         rating: Number(rating),
         place_id: placeId
     }
+    console.log(placeId);
+    
     fetch('http://127.0.0.1:5000/api/v1/reviews/', {
         method: 'POST',
         headers: {
