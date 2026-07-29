@@ -11,7 +11,7 @@
     </header>
     <main>
         {% include 'popUpDialog.html' %}
-        {% if place_data and place_data.msg != 'Token has expired' %}
+        {% if place_data and "msg" not in place_data %}
             <section id="place-details">
                 <h1 style="margin-top: 12px; margin-bottom: 12px;">{{ place_data.title }}</h1>
                 <div class="place-details-container">
