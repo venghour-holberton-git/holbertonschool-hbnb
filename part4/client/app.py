@@ -30,7 +30,6 @@ def place():
         }
     )
     data = response.json()
-    print(f"jjjjj {data}")
     return render_template('place.html', place_id=place_id, place_data=data)
 
 if __name__ == "__main__":

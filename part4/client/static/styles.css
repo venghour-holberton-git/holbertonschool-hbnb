@@ -73,7 +73,7 @@ main {
     cursor: pointer;
 }
 .custom-dialog {
-    position: absolute;
+    position: fixed;
     top: 16px;
     right: calc(-100% + 10px);
     padding: 30px;
