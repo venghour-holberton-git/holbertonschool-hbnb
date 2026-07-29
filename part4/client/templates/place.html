@@ -15,7 +15,7 @@
             <section id="place-details">
                 <h1 style="margin-top: 12px; margin-bottom: 12px;">{{ place_data.title }}</h1>
                 <div class="place-details-container">
-                    <p><strong>Price Per night: </strong>{{ place_data.price }}</p>
+                    <p><strong>Price Per night: </strong>${{ place_data.price }}</p>
                     <p><strong>Host: </strong>{{ place_data.owner.first_name }} {{ place_data.owner.last_name }}</p>
                     <p><strong>Description: </strong> {{ place_data.description }}</p>
                     <p><strong>Amenities: </strong> </p>

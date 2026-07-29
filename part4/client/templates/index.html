@@ -14,7 +14,7 @@
             <label for="price-filter">Max Price:</label>
             <select id="price-filter">
                 {% for option in ['10', '50', '100', 'All'] %}
-                <option value="{{ option }}">{{ option }}</option>
+                <option value="{{ option }}" {% if option == "All" %} selected {% endif %}>{{ option }}</option>
                 {% endfor %}
                 <!-- Options will be populated dynamically -->
             </select>
@@ -23,7 +23,7 @@
             {% for place in places %}
             <div class="place-card">
                 <h3>{{ place.title }}</h3>
-                <p>Price per Night {{ place.price }}</p>
+                <p>Price per Night: ${{ place.price }}</p>
                 <a href="http://127.0.0.1:5001/places?place_id={{ place.id }}">
                     <button class="details-button">
                         View Details
