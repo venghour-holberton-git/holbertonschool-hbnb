@@ -18,7 +18,7 @@ INSERT INTO places (id, title, description, price, latitude, longitude, owner_id
     'f31a4e7a-1111-4444-8888-aaaaaaaaaaaa',
     'Beach House',
     'Beautiful ocean view',
-    250.00,
+    45.00,
     -37.8136,
     144.9631,
     '9b17d3fd-4e2b-4c9a-b0db-9e3b50e3f001'
@@ -28,7 +28,7 @@ INSERT INTO places (id, title, description, price, latitude, longitude, owner_id
     'f31a4e7a-2222-4444-8888-bbbbbbbbbbbb',
     'City Apartment',
     'Close to downtown',
-    150.00,
+    5.00,
     -37.8140,
     144.9650,
     '9b17d3fd-4e2b-4c9a-b0db-9e3b50e3f002'
