@@ -11,7 +11,9 @@
     </header>
     <main>
         {% include 'popUpDialog.html' %}
-        {% if place_data and "msg" not in place_data %}
+        {% if place_data.id == None %}
+            <h2>No place id specified</h2>
+        {% elif place_data and "msg" not in place_data %}
             <section id="place-details">
                 <h1 style="margin-top: 12px; margin-bottom: 12px;">{{ place_data.title }}</h1>
                 <div class="place-details-container">
